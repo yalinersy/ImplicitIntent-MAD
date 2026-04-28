@@ -93,28 +93,47 @@ activity_main.xml
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center">
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/urlEditText"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/url_hint"
-        android:inputType="textUri"
-        android:padding="10dp"
-        android:textSize="18sp"/>
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/implicit_intent_title"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/navigateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_url"
-        android:padding="12dp"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/urlEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/url_hint"
+            android:inputType="textUri"
+            android:padding="10dp"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/navigateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_url"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
+
 
 
 AndroidManifest.xml
@@ -166,7 +185,9 @@ AndroidManifest.xml
 ## OUTPUT
 
 
-<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/a8816566-8cdf-493b-aee1-01ad0dc0e5d9" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/05fac164-c282-4746-bfec-f226679adad1" />
+
+
 
 <img width="1920" height="1200" alt="Screenshot 2026-04-28 081625" src="https://github.com/user-attachments/assets/38f0af60-dc32-4171-82e1-a57ff3273cfe" />
 
