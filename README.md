@@ -33,111 +33,109 @@ Program to print the text “Implicitintent”.
 Developed by: Sri Yaline R
 Registeration Number : 212224040325
 */
-
+```
 
 MainActivity.Java
 
+```
 package com.example.myapplication;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText urlEditText;
-    private Button btnOpenUrl;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        EditText editText;
+        Button button;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        urlEditText = findViewById(R.id.urlEditText);
-        btnOpenUrl = findViewById(R.id.navigateButton);
+        button = findViewById(R.id.btn);
+        editText = (EditText) findViewById(R.id.editText);
 
-
-        // Implicit Intent 1: Open a Web Browser
-        btnOpenUrl.setOnClickListener(v -> {
-            String url = urlEditText.getText().toString().trim();
-            if (url.isEmpty()) {
-                urlEditText.setError(getString(R.string.error_empty_url));
-                return;
-            }
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://" + url;
-            }
-
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            try {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url=editText.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(this, "No browser found", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
+```
 
 
 
 activity_main.xml
 
+```
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
         android:text="@string/implicit_intent_title"
-        android:textColor="@android:color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="302dp"
+        android:layout_height="69dp"
+        android:autofillHints="none"
+        android:hint="@string/url_hint"
+        android:inputType="textUri"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintVertical_bias="0.338" />
 
-        <EditText
-            android:id="@+id/urlEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/url_hint"
-            android:inputType="textUri"
-            android:padding="10dp"
-            android:textSize="18sp"/>
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.184" />
 
-        <Button
-            android:id="@+id/navigateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/open_url"
-            android:padding="12dp"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"/>
 
-    </LinearLayout>
-
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 
 
 AndroidManifest.xml
 
+```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
@@ -181,15 +179,24 @@ AndroidManifest.xml
 </manifest>
 
 ```
+strings.xml
 
+```
+<resources>
+    <string name="app_name">MyImplicitIntent</string>
+    <string name="implicit_intent_title">Implicit Intent</string>
+    <string name="url_hint">Enter URL (e.g. google.com)</string>
+    <string name="open_url">Open Website</string>
+    <string name="search">Search</string>
+    <string name="error_empty_url">Please enter a URL</string>
+</resources>
+```
 ## OUTPUT
 
 
-<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/05fac164-c282-4746-bfec-f226679adad1" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/9330c6ef-c364-47a2-afa7-c7eb6bbcbcc8" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/70376da5-50b5-481a-ac2d-97ee85dace36" />
 
-
-
-<img width="1920" height="1200" alt="Screenshot 2026-04-28 081625" src="https://github.com/user-attachments/assets/38f0af60-dc32-4171-82e1-a57ff3273cfe" />
 
 
 ## RESULT
